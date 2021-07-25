@@ -15,7 +15,7 @@ Function Get-SCCMScriptOutput {
     $ScriptGUID = (Get-CimInstance -ComputerName $SiteServer -Namespace $Namespace -ClassName SMS_ScriptsExecutionTask `
     | Where-Object -Property ClientOperationId -eq $ClientOpID).ScriptGuid
 
-    $Summary = Get-CimInstance -ComputerName win-sccm-test.int.neuralink.com -Namespace root\SMS\site_FRE -ClassName SMS_ScriptsExecutionSummary `
+    $Summary = Get-CimInstance -ComputerName win-sccm-test.int.neuralink.com -Namespace root\SMS\{{SiteName}} -ClassName SMS_ScriptsExecutionSummary `
     | Where-Object -Property ScriptGuid -eq $ScriptGUID | Select -Property ScriptOutput
 
     # SCCM returns the results for each client as one string
